@@ -2,11 +2,11 @@
   "name": "03_project",
   "version": "1.0.0",
   "description": "A backend project on industry standard level",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js"
   },
   "keywords": [
     "javascript",
@@ -22,6 +22,8 @@
     "prettier": "^3.4.0"
   },
   "dependencies": {
-    "express": "^4.21.1"
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.2"
   }
 }
