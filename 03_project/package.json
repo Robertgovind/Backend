@@ -1,0 +1,27 @@
+{
+  "name": "03_project",
+  "version": "1.0.0",
+  "description": "A backend project on industry standard level",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "npm",
+    "backend"
+  ],
+  "author": "Govind Kr Yadav",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.0"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}

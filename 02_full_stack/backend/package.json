@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Connecting frontend and backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Govind Kr Yadav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
