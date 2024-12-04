@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String, // link of the image
-      require: true,
+      required: true,
     },
     coverImage: {
       type: String, // link of the image
