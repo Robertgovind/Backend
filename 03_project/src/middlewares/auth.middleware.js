@@ -1,29 +1,42 @@
-import { ApiError } from "../utils/apiError";
-import { asyncHandler } from "../utils/asyncHandler";
-import { User } from "../models/user.model";
+import { ApiError } from "../utils/apiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-export const verifyJWT = asyncHandler(async (req, res, next) => {
+// res is not used so it is written as _
+export const verifyJWT = asyncHandler(async (req, _, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
+
     if (!token) {
       throw new ApiError(401, "Unauthorized request");
     }
-    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-    const user = await User.findById(decodedToken?._id).select(
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    } catch (err) {
+      throw new ApiError(401, "Invalid access token");
+    }
+
+    if (!decodedToken?._id) {
+      throw new ApiError(401, "Malformed token");
+    }
+
+    const user = await User.findById(decodedToken._id).select(
       "-password -refreshToken"
     );
 
     if (!user) {
-      // Discuss about frontend part
-      throw new ApiError(401, "Invalid Access Token");
+      throw new ApiError(401, "User not found for this token");
     }
-    req.user = user; // add new user object
+
+    req.user = user;
     next();
   } catch (error) {
-    throw new ApiError(401, error?.message || "Invalid access token");
+    console.error("JWT Verification Error:", error.message); // Optional logging
+    throw new ApiError(401, error?.message || "Unauthorized request");
   }
 });
